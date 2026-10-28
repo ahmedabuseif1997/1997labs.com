@@ -211,3 +211,15 @@ def test_both_languages_are_indexable():
     for url in (DOMAIN, DOMAIN + "ar/", DOMAIN + "privacy.html"):
         assert f"<loc>{url}</loc>" in sitemap
     assert sitemap.count('hreflang="ar"') == 2
+
+
+def test_how_it_works_cards(home):
+    """How it works: four stacking colour cards, each with number, title, text and an illustration."""
+    cards = home.select("#how .stk-card")
+    assert len(cards) == 4
+    for n, card in enumerate(cards, 1):
+        assert card.select_one(".stk-n").get_text(strip=True) == f"0{n}"
+        assert card.select_one(f'h3[data-i18n="h{n}.t"]').get_text(strip=True)
+        assert card.select_one(f'p[data-i18n="h{n}.d"]').get_text(strip=True)
+        assert card.select_one(".stk-art svg") is not None
+    assert not home.select("#how .pil, #pworld"), "old pillar markup left"

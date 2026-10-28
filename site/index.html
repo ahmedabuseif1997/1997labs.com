@@ -432,22 +432,6 @@ html[dir="rtl"] .hero .h1{letter-spacing:0;line-height:1.25}
 .screen .top .av,.os-steps li.on b,.os-steps li.done b{background:var(--lime);color:var(--on-lime)}
 /* M coverflow for Our Work */
 .ring3d{transform:none!important}
-/* K pillars in bento colours */
-.pillars{height:380vh}
-.pstage{position:relative;height:min(60vh,520px);perspective:1400px;margin-top:24px}
-.pworld{position:absolute;left:50%;bottom:10%;width:0;height:0;transform-style:preserve-3d}
-.pil{position:absolute;bottom:0;width:200px;margin-left:-100px;display:flex;flex-direction:column;align-items:center;will-change:transform}
-.pil .cap{width:210px;height:16px;border-radius:6px 6px 0 0;background:var(--surface);border:1px solid var(--line2)}
-.pil .shaft{width:160px;height:var(--h,0px);background:repeating-linear-gradient(90deg,var(--surface) 0 18px,var(--surface2) 18px 20px);border-inline:1px solid var(--line2)}
-.pil .base{width:220px;height:20px;border-radius:0 0 6px 6px;background:var(--surface);border:1px solid var(--line2)}
-.pil.on .cap,.pil.on .base{background:var(--lime);border-color:var(--lime)}
-.pil .lab{position:absolute;bottom:calc(var(--h,0px) + 52px);width:230px;text-align:center;opacity:var(--o,0)}
-.pil .lab small{display:block;font-size:11px;letter-spacing:.25em;color:var(--lime-ink);font-weight:700;margin-bottom:4px}
-.pil .lab b{display:block;font-size:17px;margin-bottom:4px}
-.pil .lab span{display:block;color:var(--muted);font-size:12.5px;line-height:1.4}
-.floorline{position:absolute;left:50%;bottom:10%;width:min(1100px,92vw);translate:-50% 0;height:1px;background:var(--line2)}
-@media (max-width:980px){.pil{scale:.66}.pil .lab span{display:none}.pil .lab b{font-size:20px}}
-@media (max-width:620px){.pil{scale:.44}.pil .lab{width:200px}.pil .lab b{font-size:24px}.pillars{height:340vh}}
 .t-lang span{animation:flipL2 2s infinite}
 @keyframes flipL2{0%{opacity:0;transform:translateY(8px)}12%,88%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-8px)}}
 
@@ -498,9 +482,6 @@ html[dir="rtl"] .hero .h1{letter-spacing:0;line-height:1.25}
   .t-clock .clk{width:40px;height:40px;margin:0 auto 4px}.t-clock .clk i{height:15px}
   .t-clock small{font-size:11px}
   .os-scene{height:min(56vh,480px)}
-  .pstage{height:300px}
-  .pil .lab small{font-size:20px}
-  .pil .lab b{font-size:30px;line-height:1.15}
 }
 
 /* ---------- divider between the steps and the phone scene ---------- */
@@ -531,6 +512,68 @@ html[dir="rtl"] .hero .h1{letter-spacing:0;line-height:1.25}
 #tchat .bub.show{display:block;opacity:1;transform:none;transform-origin:50% 100%;animation:tbub .5s cubic-bezier(.22,.7,.2,1) both}
 #tchat .bub.show.gone{display:none}
 @keyframes tbub{from{opacity:0;transform:translateY(6px) scale(.97)}to{opacity:1;transform:none}}
+
+/* ---------- How it works: stacking colour cards ---------- */
+.how-stack{padding-bottom:60px}
+.how-stack .scene-head{text-align:center}
+.stk{position:relative;margin-top:36px}
+.stk-card{position:sticky;top:calc(88px + var(--i)*14px);display:grid;grid-template-columns:1fr 1.05fr;gap:32px;align-items:center;min-height:400px;padding:40px 44px;margin:0 auto 22vh;max-width:1080px;border-radius:28px;background:var(--cbg);color:var(--cfg);border:1px solid var(--cline);box-shadow:0 30px 60px rgba(10,12,20,.14);transform-origin:50% 0;transform:scale(calc(1 - var(--k,0)*.05));overflow:hidden}
+.stk-card:last-child{margin-bottom:0}
+.stk-card::after{content:"";position:absolute;inset:0;background:#000;opacity:calc(var(--k,0)*.25);pointer-events:none}
+.stk-top{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.stk-n{font-size:58px;font-weight:800;letter-spacing:-.04em;line-height:1;color:var(--cacc)}
+.stk-ico{width:50px;height:50px;border-radius:15px;display:grid;place-items:center;background:var(--cchip);color:var(--cacc)}
+.stk-ico svg{width:24px;height:24px}
+.stk-card h3{font-size:32px;letter-spacing:-.02em;line-height:1.1;margin:0 0 12px}
+.stk-card p{margin:0;color:var(--cmut);font-size:16.5px;line-height:1.55;max-width:420px}
+.stk-art svg{width:100%;height:auto;display:block;overflow:visible}
+.stk-card.c1{--cbg:#141615;--cfg:#ECECE8;--cmut:#A9AEAB;--cacc:#8AA2FF;--cline:transparent;--cchip:rgba(138,162,255,.14);--a-surf:rgba(255,255,255,.05);--a-sk:rgba(255,255,255,.13);--a-line:rgba(255,255,255,.12);--a-tick:#141615}
+.stk-card.c2{--cbg:#3E5BD8;--cfg:#fff;--cmut:rgba(255,255,255,.84);--cacc:#fff;--cline:transparent;--cchip:rgba(255,255,255,.16);--a-surf:rgba(255,255,255,.1);--a-sk:rgba(255,255,255,.24);--a-line:rgba(255,255,255,.2);--a-tick:#3E5BD8}
+.stk-card.c3{--cbg:var(--surface);--cfg:var(--text);--cmut:var(--muted);--cacc:var(--lime);--cline:var(--line2);--cchip:var(--glow);--a-surf:var(--surface2);--a-sk:var(--line2);--a-line:var(--line2);--a-tick:var(--on-lime)}
+.stk-card.c4{--cbg:#DDE3FB;--cfg:#141615;--cmut:#4D5468;--cacc:#3E5BD8;--cline:transparent;--cchip:rgba(62,91,216,.12);--a-surf:rgba(255,255,255,.65);--a-sk:rgba(62,91,216,.16);--a-line:rgba(62,91,216,.2);--a-tick:#fff}
+:root:not([data-theme="light"]) .stk-card.c1{--cbg:#1A1D20;--cline:var(--line2)}
+:root:not([data-theme="light"]) .stk-card.c4{--cbg:#8AA2FF;--cfg:#0F1220;--cmut:#26304F;--cacc:#0F1220;--cchip:rgba(15,18,32,.1);--a-surf:rgba(255,255,255,.28);--a-sk:rgba(15,18,32,.14);--a-line:rgba(15,18,32,.18);--a-tick:#8AA2FF}
+.stk-art .a-surf{fill:var(--a-surf);stroke:var(--a-line)}
+.stk-art .a-sk{fill:var(--a-sk)}
+.stk-art .a-ln{stroke:var(--a-line);stroke-width:1.5;fill:none}.stk-art .a-ln.dash{stroke-dasharray:4 6}
+.stk-art .a-acc{fill:var(--cacc)}
+.stk-art .a-glow{fill:var(--cacc);opacity:.14}
+.stk-art .a-tick{fill:none;stroke:var(--a-tick);stroke-width:2.6;stroke-linecap:round;stroke-linejoin:round}
+.stk-art .a-box{fill:none;stroke:var(--a-line);stroke-width:2}
+.stk-art .a-chk{fill:none;stroke:var(--cacc);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:20;stroke-dashoffset:20}
+.stk-art .a-on{fill:var(--a-tick)}.stk-art .a-on2{fill:var(--a-tick);opacity:.55}
+.stk-art .a-line{fill:none;stroke:var(--cacc);stroke-width:3.5;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:420;stroke-dashoffset:420}
+.stk-art .a-gs1{stop-color:var(--cacc);stop-opacity:.28}.stk-art .a-gs2{stop-color:var(--cacc);stop-opacity:0}
+.stk-art .a-area{opacity:0}
+.stk-art .a-ring{fill:none;stroke:var(--cacc);stroke-width:2}
+.stk-art .a-rkt{fill:none;stroke:var(--a-tick);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.stk-art .a-pop,.stk-art .a-in,.stk-art .a-tag,.stk-art .a-bob,.stk-art .a-ring{transform-box:fill-box;transform-origin:50% 50%}
+.stk-card .a-beam{animation:aBeam 2.8s ease-in-out infinite alternate}
+@keyframes aBeam{from{transform:translateY(46px)}to{transform:translateY(190px)}}
+.stk-card .a-pop{transform:scale(0);animation:aPop 4.2s ease infinite}.stk-card .a-pop.d2{animation-delay:.7s}.stk-card .a-pop.d3{animation-delay:1.4s}
+@keyframes aPop{0%,12%{transform:scale(0)}20%{transform:scale(1.15)}26%,82%{transform:scale(1)}92%,100%{transform:scale(0)}}
+.stk-card .a-chk{animation:aChk 4.5s ease infinite}.stk-card .a-chk.c2{animation-delay:.5s}.stk-card .a-chk.c3{animation-delay:1s}
+@keyframes aChk{0%,8%{stroke-dashoffset:20}18%,85%{stroke-dashoffset:0}95%,100%{stroke-dashoffset:20}}
+.stk-card .a-tag{opacity:0;animation:aTag 4.5s cubic-bezier(.22,.7,.2,1) infinite}
+@keyframes aTag{0%,30%{opacity:0;transform:translateX(-18px)}42%,85%{opacity:1;transform:none}95%,100%{opacity:0;transform:none}}
+.stk-card .a-in{opacity:0;animation:aIn 5s cubic-bezier(.22,.7,.2,1) infinite}
+.stk-card .a-in.b2{animation-delay:.35s}.stk-card .a-in.b3{animation-delay:.6s}.stk-card .a-in.b4{animation-delay:.85s}.stk-card .a-in.b5{animation-delay:1.2s}
+@keyframes aIn{0%,6%{opacity:0;transform:translateY(12px) scale(.96)}18%,84%{opacity:1;transform:none}94%,100%{opacity:0;transform:none}}
+.stk-card .a-line{animation:aLine 5s ease-in-out infinite}
+@keyframes aLine{0%,6%{stroke-dashoffset:420}40%,86%{stroke-dashoffset:0}96%,100%{stroke-dashoffset:420}}
+.stk-card .a-area{animation:aArea 5s ease-in-out infinite}
+@keyframes aArea{0%,30%{opacity:0}46%,86%{opacity:1}96%,100%{opacity:0}}
+.stk-card .a-ring{animation:aRing 1.8s ease-out infinite}
+@keyframes aRing{from{transform:scale(1);opacity:.9}to{transform:scale(3);opacity:0}}
+.stk-card .a-bob{animation:aBob 2.4s ease-in-out infinite alternate}
+@keyframes aBob{from{transform:translateY(0)}to{transform:translateY(-6px)}}
+.stk-card:not(.live) .stk-art *{animation-play-state:paused}
+@media (max-width:760px){
+  .stk-card{grid-template-columns:1fr;gap:18px;padding:26px 22px 22px;min-height:0;top:calc(80px + var(--i)*10px);margin-bottom:12vh;border-radius:24px}
+  .stk-n{font-size:44px}.stk-ico{width:44px;height:44px;border-radius:13px}
+  .stk-card h3{font-size:24px}.stk-card p{font-size:15px}
+  .stk-art{max-width:360px}
+}
 </style>
 </head>
 <body>
@@ -686,10 +729,10 @@ html[dir="rtl"] .hero .h1{letter-spacing:0;line-height:1.25}
 </section>
 
 <!-- ================= HOW IT WORKS (pillars) ================= -->
-<section class="scene pillars" id="how"><div class="scene-sticky">
+<section class="sec how-stack" id="how">
   <div class="wrap scene-head"><span class="eyebrow" data-i18n="how.eyebrow">How it works</span><h2 class="h2"><span data-i18n="k.h1">Built on 4 solid steps.</span> <span class="dim" data-i18n="k.h2">From first call to launch.</span></h2></div>
-  <div class="pstage" aria-hidden="true"><div class="floorline"></div><div class="pworld" id="pworld"><div class="pil" data-i="0"><div class="lab"><small>01</small><b data-i18n="h1.t">Free evaluation</b><span data-i18n="h1.d">We study your business and show you where AI and systems can save time and bring sales.</span></div><div class="cap"></div><div class="shaft"></div><div class="base"></div></div><div class="pil" data-i="1"><div class="lab"><small>02</small><b data-i18n="h2.t">Clear plan & price</b><span data-i18n="h2.d">A simple proposal: what we build, how long it takes and what it costs. No surprises.</span></div><div class="cap"></div><div class="shaft"></div><div class="base"></div></div><div class="pil" data-i="2"><div class="lab"><small>03</small><b data-i18n="h3.t">Design & build</b><span data-i18n="h3.d">You see progress every week and approve each step before we move on.</span></div><div class="cap"></div><div class="shaft"></div><div class="base"></div></div><div class="pil" data-i="3"><div class="lab"><small>04</small><b data-i18n="h4.t">Launch & support</b><span data-i18n="h4.d">We launch, train your team and keep improving it as your business grows.</span></div><div class="cap"></div><div class="shaft"></div><div class="base"></div></div></div></div>
-</div></section>
+  <div class="wrap stk"><article class="stk-card c1" style="--i:0"><div class="stk-txt"><div class="stk-top"><span class="stk-n">01</span><span class="stk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/><path d="M8 12.5v-1.5M10.5 12.5v-4M13 12.5V10"/></svg></span></div><h3 data-i18n="h1.t">Free evaluation</h3><p data-i18n="h1.d">We study your business and show you where AI and systems can save time and bring sales.</p></div><div class="stk-art" aria-hidden="true"><svg viewBox="0 0 320 200"><defs><clipPath id="stkClip1"><rect x="8" y="42" width="304" height="150"/></clipPath></defs><rect x="8" y="8" width="304" height="184" rx="16" class="a-surf"/><circle cx="28" cy="27" r="4" class="a-sk"/><circle cx="42" cy="27" r="4" class="a-sk"/><circle cx="56" cy="27" r="4" class="a-sk"/><path d="M8 42h304" class="a-ln"/><rect x="26" y="56" width="150" height="12" rx="6" class="a-sk"/><rect x="26" y="78" width="232" height="8" rx="4" class="a-sk"/><rect x="26" y="94" width="196" height="8" rx="4" class="a-sk"/><rect x="26" y="118" width="82" height="56" rx="10" class="a-sk"/><rect x="119" y="118" width="82" height="56" rx="10" class="a-sk"/><rect x="212" y="118" width="82" height="56" rx="10" class="a-sk"/><g clip-path="url(#stkClip1)"><g class="a-beam"><rect x="8" y="-34" width="304" height="34" class="a-glow"/><rect x="8" y="0" width="304" height="2.5" class="a-acc"/></g></g><g transform="translate(190 62)"><g class="a-pop d1"><circle r="12" class="a-acc"/><path d="m-5 0 3.5 3.5L5-4" class="a-tick"/></g></g><g transform="translate(270 98)"><g class="a-pop d2"><circle r="12" class="a-acc"/><path d="m-5 0 3.5 3.5L5-4" class="a-tick"/></g></g><g transform="translate(160 146)"><g class="a-pop d3"><circle r="12" class="a-acc"/><path d="m-5 0 3.5 3.5L5-4" class="a-tick"/></g></g></svg></div></article><article class="stk-card c2" style="--i:1"><div class="stk-txt"><div class="stk-top"><span class="stk-n">02</span><span class="stk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3h7l4 4v14H7z"/><path d="M14 3v4h4"/><path d="m9.5 13.5 2 2 3.5-4"/></svg></span></div><h3 data-i18n="h2.t">Clear plan & price</h3><p data-i18n="h2.d">A simple proposal: what we build, how long it takes and what it costs. No surprises.</p></div><div class="stk-art" aria-hidden="true"><svg viewBox="0 0 320 200"><rect x="8" y="8" width="304" height="184" rx="16" class="a-surf"/><rect x="28" y="26" width="24" height="24" rx="7" class="a-box"/><path d="m34 38 4.5 4.5 8-9" class="a-chk c1"/><rect x="66" y="34" width="190" height="9" rx="4.5" class="a-sk"/><rect x="28" y="62" width="24" height="24" rx="7" class="a-box"/><path d="m34 74 4.5 4.5 8-9" class="a-chk c2"/><rect x="66" y="70" width="150" height="9" rx="4.5" class="a-sk"/><rect x="28" y="98" width="24" height="24" rx="7" class="a-box"/><path d="m34 110 4.5 4.5 8-9" class="a-chk c3"/><rect x="66" y="106" width="210" height="9" rx="4.5" class="a-sk"/><g class="a-tag"><rect x="28" y="140" width="190" height="36" rx="18" class="a-acc"/><path d="M46 152h8l7 7-7 7h-8z" class="a-on"/><rect x="72" y="154" width="120" height="8" rx="4" class="a-on2"/></g></svg></div></article><article class="stk-card c3" style="--i:2"><div class="stk-txt"><div class="stk-top"><span class="stk-n">03</span><span class="stk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 8.5h18"/><path d="m10 12-2.5 2.5L10 17M14 12l2.5 2.5L14 17"/></svg></span></div><h3 data-i18n="h3.t">Design & build</h3><p data-i18n="h3.d">You see progress every week and approve each step before we move on.</p></div><div class="stk-art" aria-hidden="true"><svg viewBox="0 0 320 200"><rect x="8" y="8" width="304" height="184" rx="16" class="a-surf"/><circle cx="28" cy="27" r="4" class="a-sk"/><circle cx="42" cy="27" r="4" class="a-sk"/><circle cx="56" cy="27" r="4" class="a-sk"/><path d="M8 42h304" class="a-ln"/><rect x="24" y="54" width="272" height="44" rx="10" class="a-acc a-in b1"/><rect x="24" y="108" width="84" height="46" rx="10" class="a-sk a-in b2"/><rect x="118" y="108" width="84" height="46" rx="10" class="a-sk a-in b3"/><rect x="212" y="108" width="84" height="46" rx="10" class="a-sk a-in b4"/><rect x="24" y="164" width="96" height="16" rx="8" class="a-acc a-in b5"/><rect x="128" y="168" width="70" height="8" rx="4" class="a-sk a-in b5"/></svg></div></article><article class="stk-card c4" style="--i:3"><div class="stk-txt"><div class="stk-top"><span class="stk-n">04</span><span class="stk-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></span></div><h3 data-i18n="h4.t">Launch & support</h3><p data-i18n="h4.d">We launch, train your team and keep improving it as your business grows.</p></div><div class="stk-art" aria-hidden="true"><svg viewBox="0 0 320 200"><defs><linearGradient id="stkFill4" x1="0" y1="0" x2="0" y2="1"><stop offset="0" class="a-gs1"/><stop offset="1" class="a-gs2"/></linearGradient></defs><rect x="8" y="8" width="304" height="184" rx="16" class="a-surf"/><path d="M28 168h264" class="a-ln"/><path d="M28 128h264M28 88h264" class="a-ln dash"/><path d="M28 160 L80 146 L124 150 L170 118 L214 104 L254 70 L292 50 L292 168 L28 168 Z" fill="url(#stkFill4)" class="a-area"/><path d="M28 160 L80 146 L124 150 L170 118 L214 104 L254 70 L292 50" class="a-line"/><g transform="translate(292 50)"><circle r="6" class="a-acc"/><circle r="6" class="a-ring"/></g><g transform="translate(36 26)"><g class="a-bob"><circle cx="12" cy="12" r="16" class="a-acc"/><g transform="translate(2 2) scale(.85)" class="a-rkt"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></g></g></g></svg></div></article></div>
+</section>
 
 <!-- ================= CONTACT ================= -->
 <section class="sec" id="contact">
@@ -982,19 +1025,18 @@ document.getElementById("yr").textContent = new Date().getFullYear();
 })();
 
 
-/* ================= K pillars for How it works ================= */
+/* ================= How it works: stacking cards ================= */
 (function(){
-  const sec=document.getElementById("how"), w=document.getElementById("pworld"), ps=[...w.children];
-  const cl=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)), ez=t=>1-Math.pow(1-t,3);
-  const reduce=matchMedia("(prefers-reduced-motion: reduce)").matches; let mx=0,my=0,tx=0,ty=0;
-  const hs=ps.map(()=>0), ease=reduce?1:.08; // each frame moves 8% of the way, so the pillars glide instead of snapping to the scroll
-  addEventListener("pointermove",e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5},{passive:true});
-  function tick(){ const r=sec.getBoundingClientRect(), p=cl(-r.top/(r.height-innerHeight));
-    tx+=(mx-tx)*ease*.6; ty+=(my-ty)*ease*.6; w.style.transform=`rotateX(${8-ty*4}deg) rotateY(${tx*10}deg)`; const gap=innerWidth<620?(innerWidth-40)/4:innerWidth<980?165:260; let last=-1;
-    ps.forEach((pl,i)=>{ hs[i]+=(ez(cl(p*4.4-i*1.05-0.15))-hs[i])*ease; const u=hs[i]; pl.style.setProperty("--h",(240*u)+"px"); pl.style.setProperty("--o",u); pl.style.left=((i-1.5)*gap)+"px"; if(u>.98) last=i; });
-    ps.forEach((pl,i)=>pl.classList.toggle("on",i===last));
-    if(!reduce) requestAnimationFrame(tick); }
-  requestAnimationFrame(tick);
+  const cards=[...document.querySelectorAll(".stk-card")]; if(!cards.length) return;
+  const cl=(v,a=0,b=1)=>Math.min(b,Math.max(a,v)); let queued=false;
+  // --k: how much the next card already covers this one (0 = not at all, 1 = fully); the covered card shrinks and dims a little
+  const update=()=>{ queued=false; const vh=innerHeight;
+    cards.forEach((c,i)=>{ const r=c.getBoundingClientRect(), nx=cards[i+1]; let k=0;
+      if(nx){ const nt=nx.getBoundingClientRect().top; k=cl(1-(nt-r.top)/Math.max(1,r.height)); }
+      c.style.setProperty("--k",k.toFixed(3));
+      c.classList.toggle("live", r.top<vh && r.bottom>0 && k<.85); }); };
+  const ask=()=>{ if(!queued){ queued=true; requestAnimationFrame(update); } };
+  addEventListener("scroll",ask,{passive:true}); addEventListener("resize",ask); update();
 })();
 
 /* ================= Init ================= */
