@@ -12,7 +12,7 @@ from bs4 import BeautifulSoup
 
 SITE = Path(__file__).resolve().parent.parent / "site"
 DOMAIN = "https://1997labs.com/"
-PAGES = ["index.html", "privacy.html", "404.html"]
+PAGES = ["index.html", "ar/index.html", "privacy.html", "404.html"]
 EXTERNAL = ("http://", "https://", "//", "data:", "mailto:", "tel:", "#")
 DESCRIPTOR = re.compile(r"ai\s*&\s*software company", re.IGNORECASE)
 
@@ -64,9 +64,9 @@ def test_tech_company_is_stated_up_front(home):
 
 
 def test_english_copy_lives_in_the_html(home):
-    """Search engines and link previews read English from the HTML; Arabic is applied only when a visitor picks it."""
-    assert home.select_one(".hero h1").get_text(" ", strip=True) == "More customers. Less work. More revenue."
-    assert 'applyLang(safeGet("lang_x") || "en")' in (SITE / "index.html").read_text(encoding="utf-8")
+    """Search engines read English from / and Arabic from /ar/; the h1 carries the company descriptor and the slogan."""
+    assert home.select_one(".hero h1").get_text(" ", strip=True) == "1997 Labs AI & Software Company · Dubai More customers. Less work. More revenue."
+    assert "applyLang(PAGE_LANG);" in (SITE / "index.html").read_text(encoding="utf-8")
 
 
 def test_old_red_accent_is_gone():
@@ -132,7 +132,7 @@ def test_whatsapp_number_is_configured(home):
 
 def test_previous_projects_show_screenshots_without_links(home):
     cards = home.select("#work .pcard")
-    assert len(cards) == 6
+    assert len(cards) == 7
     for card in cards:
         img = card.select_one("img")
         assert img and img.get("alt") and img["src"].startswith("assets/work-")
@@ -185,3 +185,29 @@ def test_logo_files_and_structured_data(home):
         assert (SITE / "assets" / f).is_file(), f
     data = json.loads(home.select_one('script[type="application/ld+json"]').string)
     assert data["logo"] == DOMAIN + "assets/1997-labs-logo.png"
+
+
+def test_arabic_page_is_built_from_the_english_one():
+    """site/ar/index.html must match `python tools/build_ar.py` output (re-run it after editing site/index.html)."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("build_ar", SITE.parent / "tools" / "build_ar.py")
+    mod = importlib.util.module_from_spec(spec); spec.loader.exec_module(mod)
+    fresh = mod.build((SITE / "index.html").read_text(encoding="utf-8"))
+    assert (SITE / "ar" / "index.html").read_text(encoding="utf-8") == fresh, "run: python tools/build_ar.py"
+
+
+def test_both_languages_are_indexable():
+    alternates = {"en": DOMAIN, "ar": DOMAIN + "ar/", "x-default": DOMAIN}
+    for page, lang, url in (("index.html", "en", DOMAIN), ("ar/index.html", "ar", DOMAIN + "ar/")):
+        soup = load(page)
+        assert soup.html["lang"] == lang and soup.html["dir"] == ("rtl" if lang == "ar" else "ltr")
+        assert soup.find("link", rel="canonical")["href"] == url
+        assert soup.find("meta", property="og:url")["content"] == url
+        assert {l["hreflang"]: l["href"] for l in soup.find_all("link", hreflang=True)} == alternates
+        desc = soup.find("meta", attrs={"name": "description"})["content"]
+        assert 50 <= len(desc) <= 160, f"{page}: description is {len(desc)} characters"
+        assert re.search(r"[\u0600-\u06FF]", soup.select_one("h1").get_text()) if lang == "ar" else DESCRIPTOR.search(soup.select_one("h1").get_text())
+    sitemap = (SITE / "sitemap.xml").read_text()
+    for url in (DOMAIN, DOMAIN + "ar/", DOMAIN + "privacy.html"):
+        assert f"<loc>{url}</loc>" in sitemap
+    assert sitemap.count('hreflang="ar"') == 2
