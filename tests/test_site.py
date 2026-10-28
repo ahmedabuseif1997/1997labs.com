@@ -165,4 +165,23 @@ def test_tab_icon(page):
     assert ("icon", "assets/favicon.svg") in hrefs
     assert ("icon", "favicon.ico") in hrefs
     assert ("apple-touch-icon", "assets/apple-touch-icon.png") in hrefs
-    assert not any(h == "assets/1997-labs-mark.svg" for r, h in hrefs if "icon" in r), "old lime icon still used as tab icon"
+
+
+@pytest.mark.parametrize("page", PAGES)
+def test_new_logo(page):
+    """Every page header shows the owner's logo (97 mark + 1997 LABS), and the old lime mark is gone everywhere."""
+    html = (SITE / page).read_text(encoding="utf-8")
+    soup = BeautifulSoup(html, "html.parser")
+    mark = soup.select_one("a.logo svg.logo-mark, a.brand svg.logo-mark")
+    assert mark is not None, f"{page}: header logo missing"
+    assert mark.select("path") or mark.select("use[href='#lg1997']"), f"{page}: logo has no artwork"
+    if mark.select("use"):
+        assert len(soup.select("symbol#lg1997 path")) == 10
+    assert "1997-labs-mark.svg" not in html and "logo-seal" not in html
+
+
+def test_logo_files_and_structured_data(home):
+    for f in ("1997-labs-logo-black.svg", "1997-labs-logo-white.svg", "1997-labs-logo.png"):
+        assert (SITE / "assets" / f).is_file(), f
+    data = json.loads(home.select_one('script[type="application/ld+json"]').string)
+    assert data["logo"] == DOMAIN + "assets/1997-labs-logo.png"
