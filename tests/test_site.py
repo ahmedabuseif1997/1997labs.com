@@ -132,7 +132,7 @@ def test_whatsapp_number_is_configured(home):
 
 def test_previous_projects_show_screenshots_without_links(home):
     cards = home.select("#work .pcard")
-    assert len(cards) == 9
+    assert len(cards) == 10
     for card in cards:
         img = card.select_one("img")
         assert img and img.get("alt") and img["src"].startswith("assets/work-")
