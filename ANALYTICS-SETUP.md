@@ -1,4 +1,4 @@
-# 1997 Labs analytics setup
+# Lia 97 analytics setup
 
 The website is instrumented for campaign attribution, consent-aware event tracking, lead-generation events, organic search measurement, and CRM source context.
 
@@ -6,8 +6,8 @@ The website is instrumented for campaign attribution, consent-aware event tracki
 
 1. Add the Google Analytics 4 measurement ID to `analyticsConfig.ga4` in `site/index.html`.
 2. Add the Microsoft Clarity project ID to `analyticsConfig.clarity`.
-3. Verify `https://1997labs.com/` in Google Search Console using the DNS-domain method.
-4. Submit `https://1997labs.com/sitemap.xml` in Search Console.
+3. Verify `https://lia97.com/` in Google Search Console using the DNS-domain method.
+4. Submit `https://lia97.com/sitemap.xml` in Search Console.
 5. Replace the email fallback with the selected CRM or form endpoint when available.
 
 ## Events already instrumented

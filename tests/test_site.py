@@ -238,3 +238,10 @@ def test_how_it_works_cards(home):
         assert card.select_one(f'p[data-i18n="h{n}.d"]').get_text(strip=True)
         assert card.select_one(".stk-art svg") is not None
     assert not home.select("#how .pil, #pworld"), "old pillar markup left"
+
+
+def test_old_domain_is_gone():
+    """The old 1997labs.com domain was dropped (Nov 2026): no page, script or file on the site may mention it."""
+    for f in SITE.rglob("*"):
+        if f.suffix in {".html", ".js", ".css", ".xml", ".txt", ".svg", ".json"}:
+            assert "1997labs" not in f.read_text(encoding="utf-8").lower(), f
