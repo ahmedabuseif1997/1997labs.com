@@ -1,4 +1,4 @@
-"""Checks for the 1997 Labs website in site/."""
+"""Checks for the Lia97 website in site/."""
 
 from __future__ import annotations
 
@@ -11,7 +11,7 @@ import pytest
 from bs4 import BeautifulSoup
 
 SITE = Path(__file__).resolve().parent.parent / "site"
-DOMAIN = "https://1997labs.com/"
+DOMAIN = "https://lia97.com/"
 PAGES = ["index.html", "ar/index.html", "privacy.html", "404.html"]
 EXTERNAL = ("http://", "https://", "//", "data:", "mailto:", "tel:", "#")
 DESCRIPTOR = re.compile(r"ai\s*&\s*software company", re.IGNORECASE)
@@ -65,7 +65,7 @@ def test_tech_company_is_stated_up_front(home):
 
 def test_english_copy_lives_in_the_html(home):
     """Search engines read English from / and Arabic from /ar/; the h1 carries the company descriptor and the slogan."""
-    assert home.select_one(".hero h1").get_text(" ", strip=True) == "1997 Labs AI & Software Company · Dubai More customers. Less work. More revenue."
+    assert home.select_one(".hero h1").get_text(" ", strip=True) == "Lia97 AI & Software Company · Dubai More customers. Less work. More revenue."
     assert "applyLang(PAGE_LANG);" in (SITE / "index.html").read_text(encoding="utf-8")
 
 
@@ -94,7 +94,7 @@ def test_search_and_social_metadata_agree(home):
     og_image = home.find("meta", property="og:image")["content"]
     assert og_image.startswith(DOMAIN) and (SITE / og_image[len(DOMAIN):]).is_file()
     data = json.loads(home.find("script", type="application/ld+json").string)
-    assert data["url"] == DOMAIN and data["email"] == "info@1997labs.com"
+    assert data["url"] == DOMAIN and data["email"] == "info@lia97.com"
     assert f"Sitemap: {DOMAIN}sitemap.xml" in (SITE / "robots.txt").read_text()
     assert f"<loc>{DOMAIN}</loc>" in (SITE / "sitemap.xml").read_text()
 
@@ -169,7 +169,7 @@ def test_tab_icon(page):
 
 @pytest.mark.parametrize("page", PAGES)
 def test_new_logo(page):
-    """Every page header shows the owner's logo (97 mark + 1997 LABS), and the old lime mark is gone everywhere."""
+    """Every page header shows the owner's logo (the owner's artwork), and the old lime mark is gone everywhere."""
     html = (SITE / page).read_text(encoding="utf-8")
     soup = BeautifulSoup(html, "html.parser")
     mark = soup.select_one("a.logo svg.logo-mark, a.brand svg.logo-mark")

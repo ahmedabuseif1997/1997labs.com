@@ -1,5 +1,5 @@
 {
-  "name": "1997labs-review",
+  "name": "lia97-review",
   "private": true,
   "type": "module",
   "scripts": { "test": "node --test test/*.test.js" }

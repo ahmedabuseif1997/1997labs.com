@@ -1,16 +1,16 @@
-name = "1997labs-review"
+name = "lia97-review"
 main = "src/index.js"
 compatibility_date = "2026-09-01"
 
 [vars]
-ALLOWED_ORIGINS = "https://1997labs.com,https://www.1997labs.com"
+ALLOWED_ORIGINS = "https://lia97.com,https://www.lia97.com"
 MINIMAX_MODEL = "MiniMax-M3"
 MINIMAX_BASE_URL = "https://api.minimax.io/v1"
 # New chats allowed per visitor and in total per day, and messages allowed per chat.
 PER_IP_DAILY = "5"
 GLOBAL_DAILY = "300"
 CHAT_MAX_TURNS = "20"
-LEAD_TO = "info@1997labs.com"
+LEAD_TO = "info@lia97.com"
 # Prices are hidden from visitors; every quote is emailed to the owner to approve. Set to "true" to show prices.
 SHOW_PRICES = "false"
 

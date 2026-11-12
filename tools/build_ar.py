@@ -20,12 +20,12 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent.parent
 SRC = ROOT / "site" / "index.html"
 OUT = ROOT / "site" / "ar" / "index.html"
-DOMAIN = "https://1997labs.com/"
+DOMAIN = "https://lia97.com/"
 
-TITLE_AR = "1997 Labs — شركة ذكاء اصطناعي وبرمجيات في دبي"
-DESC_AR = ("1997 Labs شركة ذكاء اصطناعي وبرمجيات في دبي. نبني مساعدين أذكياء على واتساب، "
+TITLE_AR = "Lia97 — شركة ذكاء اصطناعي وبرمجيات في دبي"
+DESC_AR = ("Lia97 شركة ذكاء اصطناعي وبرمجيات في دبي. نبني مساعدين أذكياء على واتساب، "
            "ومواقع إلكترونية، ومتاجر، وأنظمة حجز، وأنظمة إدارة عملاء، وتطبيقات جوال.")
-OG_ALT_AR = "1997 Labs: عملاء أكثر. مجهود أقل. أرباح أكثر."
+OG_ALT_AR = "Lia97: عملاء أكثر. مجهود أقل. أرباح أكثر."
 VOID = {"area", "base", "br", "col", "embed", "hr", "img", "input", "link", "meta", "source", "track", "wbr"}
 
 

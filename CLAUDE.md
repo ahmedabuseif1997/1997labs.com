@@ -1,4 +1,4 @@
-# 1997 Labs site — notes for Claude
+# Lia97 site — notes for Claude
 
 Read this before working here; it replaces re-reading the whole page.
 
@@ -11,7 +11,7 @@ Read this before working here; it replaces re-reading the whole page.
 - Example figures (the +38% in the hero and the "business runs itself" scene) must keep the "not client results" note.
 - Tests: `python -m pytest` (assets, links, descriptor, colours, metadata, image budget under 400 KB each and 1 MB total).
 - Inspect `index.html` with targeted `grep` or short scripts instead of reading it whole. Check visuals with one screenshot per change, not repeated loops.
-- Domain: `https://1997labs.com/` (owner confirmed). Hosting: a new GitHub repository with GitHub Pages, created only after the owner approves the preview.
+- Domain: `https://lia97.com/` (company renamed from 1997 Labs to Lia97, Nov 2026; written "Lia97.com" in text; email info@lia97.com; the old 1997labs.com redirects to lia97.com). Hosting: a new GitHub repository with GitHub Pages, created only after the owner approves the preview.
 - WhatsApp number lives in one constant, `WHATSAPP_NUMBER`, in the page script; every `[data-wa]` link uses it. The free-evaluation form sends the visitor's details through WhatsApp.
 - "Our work" (`#work`, the 3D carousel; cards are written in the HTML) shows client projects as screenshots (`site/assets/work-*.webp`, 1200 px wide, WebP q80) with no links. The owner confirmed they built them; only state facts visible in the projects.
 - Never create videos or screen recordings (including Playwright `recordVideo`) unless the owner explicitly asks for one. Still screenshots are the default preview.

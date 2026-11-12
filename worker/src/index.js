@@ -1,4 +1,4 @@
-// 1997 Labs AI chat API (Cloudflare Worker).
+// Lia97 AI chat API (Cloudflare Worker).
 import { normaliseUrl } from "./safety.js";
 import { analyzeHtml, score, recommend, complexity } from "./analyze.js";
 import { buildQuote } from "./pricing.js";
@@ -11,7 +11,7 @@ const KEEP_DAYS = 7;       // conversations (with their plan) are kept this long
 
 function cors(req, env) {
   const origin = req.headers.get("origin") || "";
-  const allowed = (env.ALLOWED_ORIGINS || "https://1997labs.com,https://www.1997labs.com").split(",").map((s) => s.trim());
+  const allowed = (env.ALLOWED_ORIGINS || "https://lia97.com,https://www.lia97.com").split(",").map((s) => s.trim());
   return allowed.includes(origin) ? { "access-control-allow-origin": origin, vary: "origin" } : null;
 }
 const json = (data, status, headers) => new Response(JSON.stringify(data), { status, headers: { "content-type": "application/json", ...headers } });
@@ -44,7 +44,7 @@ export async function fetchSite(url) {
   const started = Date.now();
   let current = url;
   for (let hop = 0; hop < 4; hop++) {
-    const res = await fetch(current, { redirect: "manual", headers: { "user-agent": "1997LabsReviewBot/1.0 (+https://1997labs.com)", accept: "text/html" }, signal: AbortSignal.timeout(8000) });
+    const res = await fetch(current, { redirect: "manual", headers: { "user-agent": "Lia97ReviewBot/1.0 (+https://lia97.com)", accept: "text/html" }, signal: AbortSignal.timeout(8000) });
     if (res.status >= 300 && res.status < 400 && res.headers.get("location")) {
       const next = normaliseUrl(new URL(res.headers.get("location"), current).toString());
       if (!next.ok) throw new Error("bad_redirect");
@@ -178,7 +178,7 @@ export async function sendLead(env, body) {
   const about = c.site ? c.site.host : oneLine(c.business, 60) || "chat";
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST", headers: { authorization: `Bearer ${env.RESEND_API_KEY}`, "content-type": "application/json" },
-    body: JSON.stringify({ from: env.LEAD_FROM || "1997 Labs Reviews <reviews@1997labs.com>", to: [env.LEAD_TO || "info@1997labs.com"], subject: `${q ? "Quote to approve" : "Call-back request"}: ${name} (${about})`, text, ...replyTo }),
+    body: JSON.stringify({ from: env.LEAD_FROM || "Lia97 Reviews <reviews@lia97.com>", to: [env.LEAD_TO || "info@lia97.com"], subject: `${q ? "Quote to approve" : "Call-back request"}: ${name} (${about})`, text, ...replyTo }),
   });
   if (!res.ok) return { status: 502, data: { error: "email_failed" } };
   await env.LIMITS.put(`lead:${id}`, JSON.stringify({ name, contact, at: new Date().toISOString() }), { expirationTtl: 2592000 });

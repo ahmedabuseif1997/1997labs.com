@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://1997labs.com/sitemap.xml
+Sitemap: https://lia97.com/sitemap.xml

@@ -1,6 +1,6 @@
-# 1997 Labs — company website
+# Lia97 — company website
 
-Website for **1997 Labs**, an AI & software company in Dubai. Static HTML in `site/`, with no build step. `.github/workflows/pages.yml` runs the tests on every change and publishes `site/` to GitHub Pages when `main` changes.
+Website for **Lia97**, an AI & software company in Dubai. Static HTML in `site/`, with no build step. `.github/workflows/pages.yml` runs the tests on every change and publishes `site/` to GitHub Pages when `main` changes.
 
 ## Preview locally
 
@@ -26,7 +26,7 @@ python -m pytest                         # checks (pip install -r requirements-d
 
 1. Approve the preview.
 2. Enable Pages: Settings → Pages → Build and deployment → Source: GitHub Actions. Then re-run the latest **Deploy to GitHub Pages** workflow (Actions tab).
-3. Point `1997labs.com` at GitHub Pages at your registrar: four `A` records on `@` (`185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`) and a `CNAME` record for `www` to `<your-user>.github.io`. Remove the records that point the domain elsewhere today.
+3. Point `Lia97.com` at GitHub Pages at your registrar: four `A` records on `@` (`185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`) and a `CNAME` record for `www` to `<your-user>.github.io`. Remove the records that point the domain elsewhere today.
 4. Have the privacy notice reviewed by someone qualified in UAE data protection (Federal Decree-Law 45/2021) before launch.
 5. Later: add GA4 and Clarity IDs (`ANALYTICS-SETUP.md`), connect the form to a form service or CRM, and add the Arabic version.
 
@@ -34,15 +34,15 @@ python -m pytest                         # checks (pip install -r requirements-d
 
 A free chat in the corner of the site (`site/assets/review.js`), answered by MiniMax through the API in `worker/` (Cloudflare Worker), in English or Arabic. The AI asks short questions to understand the customer's business and need, checks any website address they send (the server opens the page and gives the AI only the check results), and recommends services from the owner's list in `worker/src/pricing.js`. Rules in `worker/src/ai.js` keep it on topic and stop it from following instructions typed by visitors.
 
-Prices always come from the price sheet, never from the AI. The AI never sees them, and the server replaces any reply that mentions money. Visitors see the recommended plan (no prices) and leave a name and contact; the full priced quote and the conversation are emailed to info@1997labs.com marked "QUOTE TO APPROVE". Set `SHOW_PRICES = "true"` in `worker/wrangler.toml` to show prices on the site instead. Lead emails (step 5) are therefore required. Without a MiniMax key the chat still checks websites with fixed wording and otherwise hands the visitor to WhatsApp or a call back. The chat stays hidden until `REVIEW_API` is set in `site/assets/review.js`.
+Prices always come from the price sheet, never from the AI. The AI never sees them, and the server replaces any reply that mentions money. Visitors see the recommended plan (no prices) and leave a name and contact; the full priced quote and the conversation are emailed to info@lia97.com marked "QUOTE TO APPROVE". Set `SHOW_PRICES = "true"` in `worker/wrangler.toml` to show prices on the site instead. Lead emails (step 5) are therefore required. Without a MiniMax key the chat still checks websites with fixed wording and otherwise hands the visitor to WhatsApp or a call back. The chat stays hidden until `REVIEW_API` is set in `site/assets/review.js`.
 
 Setup, once:
 
 1. **Cloudflare**: create a free account. Create an API token with the "Edit Cloudflare Workers" template. In GitHub (Settings → Secrets and variables → Actions) add secrets `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID`.
-2. **Daily limits store**: in Cloudflare, Storage → KV → create a namespace (for example `1997labs-review-limits`). Add its id as the repository **variable** `KV_NAMESPACE_ID`.
-3. **Bot check**: in Cloudflare, Turnstile → add a widget for `1997labs.com`. Put the **site key** in `TURNSTILE_SITE_KEY` in `site/assets/review.js`, and add the **secret key** as the secret `TURNSTILE_SECRET`.
+2. **Daily limits store**: in Cloudflare, Storage → KV → create a namespace (for example `lia97-review-limits`). Add its id as the repository **variable** `KV_NAMESPACE_ID`.
+3. **Bot check**: in Cloudflare, Turnstile → add a widget for `Lia97.com`. Put the **site key** in `TURNSTILE_SITE_KEY` in `site/assets/review.js`, and add the **secret key** as the secret `TURNSTILE_SECRET`.
 4. **AI**: add your MiniMax API key as the secret `MINIMAX_API_KEY`. If your MiniMax account offers a spending limit, set one.
-5. **Lead emails** (required while prices are hidden): create a Resend account, verify the domain `1997labs.com` (Resend shows DNS records to add at Namecheap), and add the secret `RESEND_API_KEY`. Without it, visitors can still message you on WhatsApp, but quote requests from the chat fail.
+5. **Lead emails** (required while prices are hidden): create a Resend account, verify the domain `Lia97.com` (Resend shows DNS records to add at Namecheap), and add the secret `RESEND_API_KEY`. Without it, visitors can still message you on WhatsApp, but quote requests from the chat fail.
 6. Run **Actions → Review chatbot → Run workflow**. Copy the `workers.dev` address from the deploy log into `REVIEW_API` in `site/assets/review.js`.
 
 Limits (in `worker/wrangler.toml`): 5 new chats per visitor per day, 300 new chats per day in total, 20 messages per chat, 3 quote or call-back requests per visitor per day. Conversations are kept for 7 days. Each chat message saves one record in the Cloudflare KV store; Cloudflare's free plan limits KV writes per day (see Cloudflare's Workers KV pricing), so move to the Workers paid plan if the chat gets busy. Tests: `cd worker && npm test`.

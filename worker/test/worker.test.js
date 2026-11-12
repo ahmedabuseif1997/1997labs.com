@@ -139,8 +139,8 @@ test("chat: works without the AI, and limits each conversation", async () => {
 test("handler: rejects other websites, and new chats need the bot check", async () => {
   const req = (origin, body, path = "/api/chat") => new Request(`https://w.dev${path}`, { method: "POST", headers: { origin, "content-type": "application/json" }, body: JSON.stringify(body) });
   assert.equal((await worker.fetch(req("https://evil.com", {}), {})).status, 403);
-  assert.equal((await worker.fetch(req("https://1997labs.com", { text: "hi" }), {})).status, 403); // no Turnstile secret configured
-  assert.equal((await worker.fetch(req("https://1997labs.com", {}, "/api/review"), {})).status, 404);
+  assert.equal((await worker.fetch(req("https://lia97.com", { text: "hi" }), {})).status, 403); // no Turnstile secret configured
+  assert.equal((await worker.fetch(req("https://lia97.com", {}, "/api/review"), {})).status, 404);
 });
 
 test("quote requests email the plan, prices and conversation to the owner only", async () => {
@@ -156,7 +156,7 @@ test("quote requests email the plan, prices and conversation to the owner only",
     assert.equal((await sendLead({ LIMITS: kv }, { name: "Sara", contact: "x", chatId })).status, 503);
     const ok = await sendLead({ LIMITS: kv, RESEND_API_KEY: "k" }, { name: "Sara", contact: "sara@example.com", chatId });
     assert.equal(ok.status, 200);
-    assert.match(sent.url, /api\.resend\.com/); assert.deepEqual(sent.body.to, ["info@1997labs.com"]);
+    assert.match(sent.url, /api\.resend\.com/); assert.deepEqual(sent.body.to, ["info@lia97.com"]);
     const t = sent.body.text;
     assert.match(t, /QUOTE TO APPROVE/); assert.match(t, /Business \(AI summary\): Dental clinic/);
     assert.match(t, /Total: [\d,]+–[\d,]+ AED excl\. 5% VAT/); assert.match(t, /AED\/month excl\. 5% VAT/);
