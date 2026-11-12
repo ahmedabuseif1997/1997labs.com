@@ -1,0 +1,25 @@
+name: Tests
+
+# Runs the site checks on every change. Publishing is done by Vercel (vercel.json),
+# which deploys main to production and every other branch to a preview address.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
+        with:
+          python-version: "3.12"
+      - name: Install test tools
+        run: pip install -r requirements-dev.txt
+      - name: Tests
+        run: python -m pytest -q

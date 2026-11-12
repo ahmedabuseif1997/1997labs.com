@@ -1,6 +1,6 @@
 # Lia 97 — company website
 
-Website for **Lia 97**, an AI & software company in Dubai. Static HTML in `site/`, with no build step. `.github/workflows/pages.yml` runs the tests on every change and publishes `site/` to GitHub Pages when `main` changes.
+Website for **Lia 97**, an AI & software company in Dubai. Static HTML in `site/`, with no build step. Hosted on Vercel: `vercel.json` publishes `site/` (production from `main`, a preview address for every other branch). `.github/workflows/tests.yml` runs the tests on every change.
 
 ## Preview locally
 
@@ -25,8 +25,8 @@ python -m pytest                         # checks (pip install -r requirements-d
 ## Before going live
 
 1. Approve the preview.
-2. Enable Pages: Settings → Pages → Build and deployment → Source: GitHub Actions. Then re-run the latest **Deploy to GitHub Pages** workflow (Actions tab).
-3. Point `Lia97.com` at GitHub Pages at your registrar: four `A` records on `@` (`185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`) and a `CNAME` record for `www` to `<your-user>.github.io`. Remove the records that point the domain elsewhere today.
+2. Vercel: sign in with GitHub, Add New → Project → import this repository and keep the defaults (`vercel.json` sets everything) → Deploy.
+3. In the Vercel project: Settings → Domains → add `lia97.com` and `www.lia97.com` (www redirects to lia97.com). At Namecheap (lia97.com → Advanced DNS) replace the `A @` and `CNAME www` records with the values Vercel shows. Leave the email (MX) and TXT records alone.
 4. Have the privacy notice reviewed by someone qualified in UAE data protection (Federal Decree-Law 45/2021) before launch.
 5. Later: add GA4 and Clarity IDs (`ANALYTICS-SETUP.md`), connect the form to a form service or CRM, and add the Arabic version.
 

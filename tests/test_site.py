@@ -245,3 +245,10 @@ def test_old_domain_is_gone():
     for f in SITE.rglob("*"):
         if f.suffix in {".html", ".js", ".css", ".xml", ".txt", ".svg", ".json"}:
             assert "1997labs" not in f.read_text(encoding="utf-8").lower(), f
+
+
+def test_vercel_publishes_the_site_folder_as_is():
+    """Vercel hosting: site/ is published unchanged (no install, no build), folders get a trailing slash like /ar/."""
+    cfg = json.loads((SITE.parent / "vercel.json").read_text(encoding="utf-8"))
+    assert cfg["outputDirectory"] == "site" and cfg["buildCommand"] == "" and cfg["installCommand"] == ""
+    assert cfg["framework"] is None and cfg["trailingSlash"] is True
