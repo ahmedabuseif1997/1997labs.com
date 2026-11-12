@@ -1,4 +1,4 @@
-"""Checks for the Lia97 website in site/."""
+"""Checks for the Lia 97 website in site/."""
 
 from __future__ import annotations
 
@@ -65,7 +65,7 @@ def test_tech_company_is_stated_up_front(home):
 
 def test_english_copy_lives_in_the_html(home):
     """Search engines read English from / and Arabic from /ar/; the h1 carries the company descriptor and the slogan."""
-    assert home.select_one(".hero h1").get_text(" ", strip=True) == "Lia97 AI & Software Company · Dubai More customers. Less work. More revenue."
+    assert home.select_one(".hero h1").get_text(" ", strip=True) == "Lia 97 AI & Software Company · Dubai More customers. Less work. More revenue."
     assert "applyLang(PAGE_LANG);" in (SITE / "index.html").read_text(encoding="utf-8")
 
 
@@ -159,7 +159,7 @@ def test_ai_chat_is_the_real_assistant(home):
 
 @pytest.mark.parametrize("page", PAGES)
 def test_tab_icon(page):
-    """Every page uses the "97" tab icon: SVG for modern browsers, .ico fallback, and an iPhone home-screen icon."""
+    """Every page uses the Lia 97 tab icon: SVG for modern browsers, .ico fallback, and an iPhone home-screen icon."""
     soup = load(page)
     hrefs = {(" ".join(l.get("rel")), l.get("href", "").lstrip("/")) for l in soup.select("link[rel]")}
     assert ("icon", "assets/favicon.svg") in hrefs
@@ -167,24 +167,39 @@ def test_tab_icon(page):
     assert ("apple-touch-icon", "assets/apple-touch-icon.png") in hrefs
 
 
+def test_tab_icon_is_the_lia97_app_icon():
+    """CI guide app icon: the charcoal Lia 97 icon on a periwinkle rounded square."""
+    svg = (SITE / "assets" / "favicon.svg").read_text(encoding="utf-8")
+    assert 'fill="#8AA2FF"' in svg and "fill:#141615" in svg
+    assert len(re.findall(r"<path ", svg)) == 4  # the icon's four shapes, no wordmark
+
+
 @pytest.mark.parametrize("page", PAGES)
 def test_new_logo(page):
-    """Every page header shows the owner's logo (the owner's artwork), and the old lime mark is gone everywhere."""
+    """Every page header shows the owner's Lia 97 logo (their artwork: 9 shapes, the diagonal, 2 counters cut out)."""
     html = (SITE / page).read_text(encoding="utf-8")
     soup = BeautifulSoup(html, "html.parser")
     mark = soup.select_one("a.logo svg.logo-mark, a.brand svg.logo-mark")
     assert mark is not None, f"{page}: header logo missing"
-    assert mark.select("path") or mark.select("use[href='#lg1997']"), f"{page}: logo has no artwork"
-    if mark.select("use"):
-        assert len(soup.select("symbol#lg1997 path")) == 10
-    assert "1997-labs-mark.svg" not in html and "logo-seal" not in html
+    art = soup.select_one("symbol#lg97") if mark.select("use[href='#lg97']") else mark
+    assert len(art.select("path")) == 12 and len(art.select("mask path")) == 2, f"{page}: logo artwork incomplete"
+    assert "lg1997" not in html and "1997-labs-logo" not in html and "logo-seal" not in html
+
+
+def test_logo_colours_follow_the_theme(home):
+    """Dark theme: off-white + periwinkle; light theme: charcoal + cobalt (CI guide)."""
+    css = home.find("style").string
+    assert ".logo .logo-mark{display:block;height:50px;width:auto;--lg-ink:#ECECE8;--lg-acc:#8AA2FF}" in css
+    assert '[data-theme="light"] .logo .logo-mark{--lg-ink:#141615;--lg-acc:#3E5BD8}' in css
 
 
 def test_logo_files_and_structured_data(home):
-    for f in ("1997-labs-logo-black.svg", "1997-labs-logo-white.svg", "1997-labs-logo.png"):
+    for f in ("lia97-logo-light.svg", "lia97-logo-dark.svg", "lia97-icon.svg", "lia97-logo.png"):
         assert (SITE / "assets" / f).is_file(), f
+    for f in ("1997-labs-logo-black.svg", "1997-labs-logo-white.svg", "1997-labs-logo.png"):
+        assert not (SITE / "assets" / f).exists(), f"old logo file left: {f}"
     data = json.loads(home.select_one('script[type="application/ld+json"]').string)
-    assert data["logo"] == DOMAIN + "assets/1997-labs-logo.png"
+    assert data["logo"] == DOMAIN + "assets/lia97-logo.png"
 
 
 def test_arabic_page_is_built_from_the_english_one():

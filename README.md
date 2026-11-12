@@ -1,6 +1,6 @@
-# Lia97 — company website
+# Lia 97 — company website
 
-Website for **Lia97**, an AI & software company in Dubai. Static HTML in `site/`, with no build step. `.github/workflows/pages.yml` runs the tests on every change and publishes `site/` to GitHub Pages when `main` changes.
+Website for **Lia 97**, an AI & software company in Dubai. Static HTML in `site/`, with no build step. `.github/workflows/pages.yml` runs the tests on every change and publishes `site/` to GitHub Pages when `main` changes.
 
 ## Preview locally
 

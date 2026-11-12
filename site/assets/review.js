@@ -1,4 +1,4 @@
-/* Lia97 AI chat: understands what the customer needs, checks their website and suggests a plan.
+/* Lia 97 AI chat: understands what the customer needs, checks their website and suggests a plan.
    Set REVIEW_API (and TURNSTILE_SITE_KEY) after the worker is deployed; until then the chat stays hidden. */
 (() => {
   const REVIEW_API = '';          // e.g. https://lia97-review.<your-subdomain>.workers.dev
@@ -10,8 +10,8 @@
 
   const T = {
     en: {
-      launch: 'Chat with our AI · free review', short: 'AI chat', title: 'Lia97 AI', sub: 'AI assistant · replies in seconds', toggle: 'ع', close: 'Close',
-      hi: "Hi! I'm the Lia97 AI assistant. Tell me about your business and what you need, and I'll suggest the right solution. I can also check your website for free: just send its address.",
+      launch: 'Chat with our AI · free review', short: 'AI chat', title: 'Lia 97 AI', sub: 'AI assistant · replies in seconds', toggle: 'ع', close: 'Close',
+      hi: "Hi! I'm the Lia 97 AI assistant. Tell me about your business and what you need, and I'll suggest the right solution. I can also check your website for free: just send its address.",
       ideas: ['Check my website', 'I need a new website', 'I need a mobile app', 'Automate my work with AI', 'Get more customers'],
       ph: 'Type your message…', send: 'Send', typing: 'Typing…', checking: 'Checking your website…',
       human: 'Please complete the quick check below, then send your message.',
@@ -24,17 +24,17 @@
       quoteSent: 'Thanks! We will send your quote to you directly. You can keep chatting here.',
       call: 'Get a call back', callAsk: 'Leave your name and number and our team will contact you.', sent: "Thanks! We'll contact you within one working day.",
       wa: 'WhatsApp us', name: 'Your name', contact: 'Phone or email', submit: 'Send', back: 'Back to chat', newChat: 'Start a new chat',
-      waPlan: (s) => `Hi Lia97, I chatted with your AI assistant.\n${s.business ? `Business: ${s.business}\n` : ''}${s.site ? `Website: ${s.site}\n` : ''}Recommended: ${s.plan.items.map((i) => i.label).join(', ')}\nPlease send me a quote.`,
-      waPrice: (s) => `Hi Lia97, I chatted with your AI assistant.\n${s.site ? `Website: ${s.site}\n` : ''}Estimate: ${fmt(s.plan.total.from)}–${fmt(s.plan.total.to)} AED (excl. 5% VAT)\nPlan: ${s.plan.items.map((i) => i.label).join(', ')}`,
-      waHello: (s) => `Hi Lia97, I chatted with your AI assistant${s.business ? ` about my business (${s.business})` : ''}. Can you help me?`,
+      waPlan: (s) => `Hi Lia 97, I chatted with your AI assistant.\n${s.business ? `Business: ${s.business}\n` : ''}${s.site ? `Website: ${s.site}\n` : ''}Recommended: ${s.plan.items.map((i) => i.label).join(', ')}\nPlease send me a quote.`,
+      waPrice: (s) => `Hi Lia 97, I chatted with your AI assistant.\n${s.site ? `Website: ${s.site}\n` : ''}Estimate: ${fmt(s.plan.total.from)}–${fmt(s.plan.total.to)} AED (excl. 5% VAT)\nPlan: ${s.plan.items.map((i) => i.label).join(', ')}`,
+      waHello: (s) => `Hi Lia 97, I chatted with your AI assistant${s.business ? ` about my business (${s.business})` : ''}. Can you help me?`,
       errLimit: "Today's chat limit is reached. Please message us on WhatsApp and we'll help you.",
       errChatLimit: 'This chat is getting long, so our team will take it from here. WhatsApp us or ask for a call back.',
       errBot: 'The human check failed. Please try again.', err: 'Something went wrong. Please try again, or message us on WhatsApp.',
       expired: 'This chat expired, so I started a new one. Please send your message again.',
     },
     ar: {
-      launch: 'تحدث مع مساعدنا الذكي · مراجعة مجانية', short: 'مساعد ذكي', title: 'مساعد Lia97', sub: 'مساعد ذكي · يرد خلال ثوانٍ', toggle: 'EN', close: 'إغلاق',
-      hi: 'مرحبًا! أنا المساعد الذكي لـ Lia97. أخبرني عن نشاطك التجاري وما تحتاجه، وسأقترح عليك الحل المناسب. يمكنني أيضًا فحص موقعك مجانًا: فقط أرسل عنوانه.',
+      launch: 'تحدث مع مساعدنا الذكي · مراجعة مجانية', short: 'مساعد ذكي', title: 'مساعد Lia 97', sub: 'مساعد ذكي · يرد خلال ثوانٍ', toggle: 'EN', close: 'إغلاق',
+      hi: 'مرحبًا! أنا المساعد الذكي لـ Lia 97. أخبرني عن نشاطك التجاري وما تحتاجه، وسأقترح عليك الحل المناسب. يمكنني أيضًا فحص موقعك مجانًا: فقط أرسل عنوانه.',
       ideas: ['افحص موقعي', 'أحتاج موقعًا جديدًا', 'أحتاج تطبيق جوال', 'أتمتة عملي بالذكاء الاصطناعي', 'عملاء أكثر'],
       ph: 'اكتب رسالتك…', send: 'إرسال', typing: 'يكتب…', checking: 'جارٍ فحص موقعك…',
       human: 'أكمل التحقق السريع أدناه، ثم أرسل رسالتك.',
@@ -47,9 +47,9 @@
       quoteSent: 'شكرًا! سنرسل لك عرض السعر مباشرة. يمكنك متابعة المحادثة هنا.',
       call: 'اطلب اتصالًا', callAsk: 'اترك اسمك ورقمك وسيتواصل معك فريقنا.', sent: 'شكرًا! سنتواصل معك خلال يوم عمل واحد.',
       wa: 'راسلنا على واتساب', name: 'اسمك', contact: 'الهاتف أو البريد', submit: 'إرسال', back: 'العودة إلى المحادثة', newChat: 'ابدأ محادثة جديدة',
-      waPlan: (s) => `مرحبًا Lia97، تحدثت مع مساعدكم الذكي.\n${s.business ? `النشاط: ${s.business}\n` : ''}${s.site ? `الموقع: ${s.site}\n` : ''}الخطة المقترحة: ${s.plan.items.map((i) => i.label).join('، ')}\nأرجو إرسال عرض السعر.`,
-      waPrice: (s) => `مرحبًا Lia97، تحدثت مع مساعدكم الذكي.\n${s.site ? `الموقع: ${s.site}\n` : ''}التقدير: ${fmt(s.plan.total.from)}–${fmt(s.plan.total.to)} درهم (غير شامل ضريبة القيمة المضافة 5%)\nالخطة: ${s.plan.items.map((i) => i.label).join('، ')}`,
-      waHello: () => 'مرحبًا Lia97، تحدثت مع مساعدكم الذكي. هل يمكنكم مساعدتي؟',
+      waPlan: (s) => `مرحبًا Lia 97، تحدثت مع مساعدكم الذكي.\n${s.business ? `النشاط: ${s.business}\n` : ''}${s.site ? `الموقع: ${s.site}\n` : ''}الخطة المقترحة: ${s.plan.items.map((i) => i.label).join('، ')}\nأرجو إرسال عرض السعر.`,
+      waPrice: (s) => `مرحبًا Lia 97، تحدثت مع مساعدكم الذكي.\n${s.site ? `الموقع: ${s.site}\n` : ''}التقدير: ${fmt(s.plan.total.from)}–${fmt(s.plan.total.to)} درهم (غير شامل ضريبة القيمة المضافة 5%)\nالخطة: ${s.plan.items.map((i) => i.label).join('، ')}`,
+      waHello: () => 'مرحبًا Lia 97، تحدثت مع مساعدكم الذكي. هل يمكنكم مساعدتي؟',
       errLimit: 'وصلنا إلى حد المحادثات اليوم. راسلنا على واتساب وسنساعدك.',
       errChatLimit: 'أصبحت المحادثة طويلة، وسيتابع فريقنا معك. راسلنا على واتساب أو اطلب اتصالًا.',
       errBot: 'فشل التحقق. حاول مرة أخرى.', err: 'حدث خطأ. حاول مرة أخرى أو راسلنا على واتساب.',

@@ -1,10 +1,10 @@
-# Lia97 — Brand & Company Profile
+# Lia 97 — Brand & Company Profile
 
 ## Brand foundation
 
 **Brand promise:** Systems that move business.
 
-**Positioning:** Lia97 is the Dubai technology partner behind the whole system—connecting AI, operations, digital experience, data, and cloud infrastructure.
+**Positioning:** Lia 97 is the Dubai technology partner behind the whole system—connecting AI, operations, digital experience, data, and cloud infrastructure.
 
 **Mission:** Turn business complexity into technology that creates measurable leverage.
 
@@ -24,7 +24,7 @@
 
 **Primary tagline:** Systems that move business.
 
-**Elevator pitch:** Lia97 builds AI agents, CRM platforms, websites, apps, API integrations, and connected technology systems for ambitious companies. From strategy and product design to engineering, integration, and scale, one senior team owns the whole system.
+**Elevator pitch:** Lia 97 builds AI agents, CRM platforms, websites, apps, API integrations, and connected technology systems for ambitious companies. From strategy and product design to engineering, integration, and scale, one senior team owns the whole system.
 
 **Short bio:** Dubai technology studio building AI, software, and connected business systems.
 
@@ -44,9 +44,9 @@
 - **Warm white:** `#F4F5EF` — clarity and typography
 - **Slate:** `#87918B` — supporting text
 
-Since the October 2026 redesign the website is light by default (soft grey `#ECECE8` and white surfaces, near-black text) with a dark mode (charcoal `#111314`), one calm blue accent, Manrope type (IBM Plex Sans Arabic for Arabic), thin hairlines, a giant thin "1997" and the owner's logo (a new Lia97 logo is on its way; the company was renamed from 1997 Labs in Nov 2026). Keep layouts spacious and legible. The 1997 monogram remains the compact mark.
+Since the October 2026 redesign the website is light by default (soft grey `#ECECE8` and white surfaces, near-black text) with a dark mode (charcoal `#111314`), one calm blue accent, Manrope type (IBM Plex Sans Arabic for Arabic), thin hairlines, a giant thin "1997" and the owner's Lia 97 logo (the company was renamed from 1997 Labs in Nov 2026): charcoal #141615 with a cobalt #3E5BD8 diagonal on light backgrounds, off-white #ECECE8 with a periwinkle #8AA2FF diagonal on dark. Keep layouts spacious and legible. The Lia 97 icon (without the wordmark) is the compact mark; as an app icon it is charcoal on periwinkle.
 
-Always show the descriptor **AI & Software Company** next to the name, so every visitor knows at a glance that Lia97 is a technology company.
+Always show the descriptor **AI & Software Company** next to the name, so every visitor knows at a glance that Lia 97 is a technology company.
 
 ## Messaging pillars
 
@@ -64,4 +64,4 @@ Cloud architecture and APIs should stay secure, maintainable, and ready for grow
 
 ## Boilerplate
 
-Lia97 is a Dubai-based technology company building AI agents, CRM platforms, websites, apps, API integrations, and connected business systems. The studio combines strategy, product design, engineering, automation, and integration to help ambitious companies move faster with technology that stays useful.
+Lia 97 is a Dubai-based technology company building AI agents, CRM platforms, websites, apps, API integrations, and connected business systems. The studio combines strategy, product design, engineering, automation, and integration to help ambitious companies move faster with technology that stays useful.

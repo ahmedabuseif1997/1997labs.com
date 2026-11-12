@@ -1,6 +1,6 @@
-# Lia97 website — Claude handoff
+# Lia 97 website — Claude handoff
 
-This folder holds the current Lia97 website. It has not been published yet.
+This folder holds the current Lia 97 website. It has not been published yet.
 
 ## Open the website
 
@@ -14,8 +14,8 @@ python -m http.server -d site 8002   # then open http://localhost:8002
 
 - `site/index.html` — page structure, styling, motion, responsive behaviour, analytics scaffolding and copy.
 - `site/assets/fonts/` — self-hosted Manrope and IBM Plex Sans Arabic (OFL-1.1, from Fontsource).
-- Logo (owner's artwork, Oct 2026): slanted "97" mark + "1997 LABS" lettering (company renamed Lia97 in Nov 2026; owner is sending a new Lia97 logo, which replaces this artwork). Inline in every page header (index uses one `<symbol id="lg1997">` for header and footer), black on light theme, white on dark. Files: `site/assets/1997-labs-logo-black.svg`, `site/assets/1997-labs-logo-white.svg` (transparent), `site/assets/1997-labs-logo.png` (1600×400 on white, JSON-LD `logo`). Never redraw or recolour the artwork.
-- Tab icons from the logo's "97" mark: `site/assets/favicon.svg` (white mark on a dark #141615 circle), `site/favicon.ico` (16/32/48), `site/assets/apple-touch-icon.png` (180, full-bleed square).
+- Logo (owner's designer files, Nov 2026): Lia 97 icon + "Lia 97" wordmark, used exactly as supplied: the background rect is dropped and the two background-coloured counters (inside the "9" and the "a") are cut out with an SVG mask, so they show whatever is behind. Inline in every page header (index uses one `<symbol id="lg97">` for header and footer, colours from the CSS variables `--lg-ink` / `--lg-acc`): light theme charcoal #141615 + cobalt #3E5BD8 diagonal, dark theme off-white #ECECE8 + periwinkle #8AA2FF diagonal. Files: `site/assets/lia97-logo-light.svg`, `site/assets/lia97-logo-dark.svg`, `site/assets/lia97-icon.svg` (transparent), `site/assets/lia97-logo.png` (1600×600 on white, JSON-LD `logo`). Never redraw or recolour the artwork.
+- Tab icons (CI guide app icon): the icon in one colour, charcoal, on periwinkle #8AA2FF: `site/assets/favicon.svg` (rounded square), `site/favicon.ico` (16/32/48), `site/assets/apple-touch-icon.png` (180, full-bleed square).
 - `site/assets/og-image.jpg` — 1200×630 share image (screenshot of the light-mode hero).
 - `site/privacy.html`, `site/404.html`, `site/robots.txt`, `site/sitemap.xml`.
 - `1997-LABS-BRAND-PROFILE.md` — positioning and brand foundation.
@@ -25,13 +25,13 @@ Older hero and logo files, `LOGO-GUIDE.md` (which describes the earlier 971 Labs
 
 ## Current direction
 
-- Brand: Lia97, an **AI & Software Company** in Dubai. The descriptor sits next to the logo on every screen.
+- Brand: Lia 97, an **AI & Software Company** in Dubai. The descriptor sits next to the logo on every screen.
 - Main hook: “More customers. Less work. More revenue.”
 - Primary action: free business evaluation.
 - Design: the owner's chosen "Design ★" (Oct 2026), a mix of the Signal, Bento, Navy Official and Platinum Minimal concepts. Light mode by default with a dark switch; English and Arabic (full right-to-left).
 - Palette: light background `#ECECE8`, surfaces `#FFFFFF`, text `#141615`, accent blue `#3E5BD8`; dark background `#111314`, surfaces `#1A1D20`, text `#ECECE8`, accent `#8AA2FF`.
 - Voice: short, plain, catchy, and understandable to a nontechnical business owner.
-- Layout: the owner's logo in the menu bar; hero with live tiles led by a split-flap board (LIA97 + the services, a new word every 2.5 s), "watch your business run itself" 3D scene, services that assemble in 3D, a 3D carousel of real projects, industries, four rising "how it works" pillars, and the free-evaluation form.
+- Layout: the owner's logo in the menu bar; hero with live tiles led by a split-flap board (LIA 97 + the services, a new word every 2.5 s), "watch your business run itself" 3D scene, services that assemble in 3D, a 3D carousel of real projects, industries, four rising "how it works" pillars, and the free-evaluation form.
 
 ## Implementation notes
 

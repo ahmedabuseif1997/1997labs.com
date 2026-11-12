@@ -1,4 +1,4 @@
-// Lia97 AI chat API (Cloudflare Worker).
+// Lia 97 AI chat API (Cloudflare Worker).
 import { normaliseUrl } from "./safety.js";
 import { analyzeHtml, score, recommend, complexity } from "./analyze.js";
 import { buildQuote } from "./pricing.js";
@@ -178,7 +178,7 @@ export async function sendLead(env, body) {
   const about = c.site ? c.site.host : oneLine(c.business, 60) || "chat";
   const res = await fetch("https://api.resend.com/emails", {
     method: "POST", headers: { authorization: `Bearer ${env.RESEND_API_KEY}`, "content-type": "application/json" },
-    body: JSON.stringify({ from: env.LEAD_FROM || "Lia97 Reviews <reviews@lia97.com>", to: [env.LEAD_TO || "info@lia97.com"], subject: `${q ? "Quote to approve" : "Call-back request"}: ${name} (${about})`, text, ...replyTo }),
+    body: JSON.stringify({ from: env.LEAD_FROM || "Lia 97 Reviews <reviews@lia97.com>", to: [env.LEAD_TO || "info@lia97.com"], subject: `${q ? "Quote to approve" : "Call-back request"}: ${name} (${about})`, text, ...replyTo }),
   });
   if (!res.ok) return { status: 502, data: { error: "email_failed" } };
   await env.LIMITS.put(`lead:${id}`, JSON.stringify({ name, contact, at: new Date().toISOString() }), { expirationTtl: 2592000 });
