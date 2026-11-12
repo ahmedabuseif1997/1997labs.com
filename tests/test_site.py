@@ -245,3 +245,11 @@ def test_old_domain_is_gone():
     for f in SITE.rglob("*"):
         if f.suffix in {".html", ".js", ".css", ".xml", ".txt", ".svg", ".json"}:
             assert "1997labs" not in f.read_text(encoding="utf-8").lower(), f
+
+
+def test_digitalocean_publishes_the_site_folder():
+    """DigitalOcean App Platform: plain HTML static site from site/, deployed from main, lia97.com as primary domain."""
+    spec = (SITE.parent / ".do" / "app.yaml").read_text(encoding="utf-8")
+    for line in ("environment_slug: html", "repo: ahmedabuseif1997/1997labs.com", "branch: main", "deploy_on_push: true",
+                 "source_dir: site", "error_document: 404.html", "domain: lia97.com\n    type: PRIMARY"):
+        assert line in spec, line

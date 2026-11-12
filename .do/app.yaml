@@ -1,0 +1,19 @@
+# DigitalOcean App Platform: the Lia 97 website as a static site (free tier for static-only apps).
+# Mirrors the app's settings in the DigitalOcean control panel.
+# To apply: the app → Settings → App Spec → Edit → paste this file → Save.
+name: lia97
+static_sites:
+  - name: website
+    environment_slug: html          # plain HTML, no build step (as in DigitalOcean's sample-html app)
+    github:
+      repo: ahmedabuseif1997/1997labs.com
+      branch: main
+      deploy_on_push: true          # every change merged to main goes live
+    source_dir: site                # only site/ is published
+    index_document: index.html
+    error_document: 404.html
+domains:
+  - domain: lia97.com
+    type: PRIMARY
+  - domain: www.lia97.com
+    type: ALIAS
