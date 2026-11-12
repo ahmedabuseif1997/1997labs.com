@@ -238,3 +238,11 @@ def test_how_it_works_cards(home):
         assert card.select_one(f'p[data-i18n="h{n}.d"]').get_text(strip=True)
         assert card.select_one(".stk-art svg") is not None
     assert not home.select("#how .pil, #pworld"), "old pillar markup left"
+
+
+def test_logo_keeps_the_designers_drawing_order(home):
+    """In the designer's file the dark piece right of the blue diagonal is drawn on top of the diagonal.
+    If the diagonal is drawn last it covers that piece and the icon loses its lower-right corner."""
+    fills = [p.get("style", "") for p in home.select("symbol#lg97 > g > path")]
+    acc = fills.index("fill:var(--lg-acc)")
+    assert "fill:var(--lg-ink)" in fills[acc + 1:], "the diagonal must not be the last shape drawn"
